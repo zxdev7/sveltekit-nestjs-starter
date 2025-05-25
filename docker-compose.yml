@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: starter-kit-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: johndoe
+      POSTGRES_PASSWORD: randompassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # NestJS Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    container_name: starter-kit-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://johndoe:randompassword@postgres:5432/mydb?schema=public
+      PORT_API: 5000
+      CORS_ORIGIN: http://localhost:5173,http://localhost:3000
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+    volumes:
+      - ./apps/api:/app/apps/api
+      - /app/apps/api/node_modules
+
+  # SvelteKit Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: ./apps/frontend/Dockerfile
+    container_name: starter-kit-frontend
+    restart: unless-stopped
+    environment:
+      PUBLIC_API_URL: http://localhost:5000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    volumes:
+      - ./apps/frontend:/app/apps/frontend
+      - /app/apps/frontend/node_modules
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

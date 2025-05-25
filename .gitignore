@@ -1,0 +1,84 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Production build files
+dist
+build
+.svelte-kit
+.netlify
+.vercel
+.output
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.classpath
+*.launch
+.settings/
+
+# Cache
+.eslintcache
+.stylelintcache
+.prettiercache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Svelte
+apps/frontend/.svelte-kit
+apps/frontend/build
+apps/frontend/package
+apps/frontend/.env
+apps/frontend/.env.*
+!apps/frontend/.env.example
+
+# NestJS
+apps/api/dist
+apps/api/node_modules
+apps/api/coverage
+apps/api/.nyc_output
+apps/api/.env
+apps/api/.env.*
+!apps/api/.env.example
+
+# Prisma
+apps/api/prisma/generated/
+apps/api/generated/
+
+# Database
+*.sqlite
+*.sqlite3
+
+# Misc
+.DS_Store
+Thumbs.db

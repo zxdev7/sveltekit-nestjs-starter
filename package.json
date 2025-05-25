@@ -1,0 +1,22 @@
+{
+  "name": "sveltekit-nestjs-starter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:web": "npm run dev --workspace=apps/frontend",
+    "dev:api": "npm run start:dev --workspace=apps/api",
+    "build": "npm run build --workspaces",
+    "build:web": "npm run build --workspace=apps/frontend",
+    "build:api": "npm run build --workspace=apps/api",
+    "lint": "npm run lint --workspaces",
+    "test": "npm run test --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
